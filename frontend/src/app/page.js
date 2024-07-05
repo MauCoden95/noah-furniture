@@ -2,21 +2,57 @@
 import Image from "next/image";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPlay, faStar } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+
+// import required modules
+import { Pagination } from 'swiper/modules';
 
 
 
 export default function Home() {
 
+  const [products, setProducts] = useState([]);
+
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Duración de la animación en milisegundos
-      once: true, // Si true, la animación se ejecutará solo una vez
+      duration: 1000,
+      once: true,
     });
+
+
+    const fetchProducts = async () => {
+      const products = await getProducts();
+      setProducts(products);
+      console.log(products);
+    };
+
+    fetchProducts();
   }, []);
+
+  const getProducts = async () => {
+    const res = await fetch('http://127.0.0.1:8000/api/products-random');
+    const data = await res.json();
+    return data;
+  };
+
+
+
+
+
+
+
 
 
   return (
@@ -30,14 +66,14 @@ export default function Home() {
             Descubre nuestra exclusiva colección de muebles diseñados para brindar elegancia y funcionalidad a cada rincón de tu hogar. Ofrecemos piezas únicas que reflejan tu personalidad y buen gusto.
           </p>
           <div className="my-5 flex flex-col md:flex-row items-center">
-              <a className="cursor-pointer text-lg md:text-xl bg-orange-500 hover:bg-orange-400 duration-300 px-5 py-3 rounded-full text-center md:text-left">
-                  Descubrir ahora
-              </a>
+            <a className="cursor-pointer text-lg md:text-xl bg-orange-500 hover:bg-orange-400 duration-300 px-5 py-3 rounded-full text-center md:text-left">
+              Descubrir ahora
+            </a>
 
-              <button className="mt-5 md:mt-0 md:ml-8 flex items-center">
-                  <FontAwesomeIcon className="border-4 border-orange-500 p-4 rounded-full" icon={faPlay} />
-                  <span className="ml-5 leading-8 text-xl">Ver video</span>
-              </button>
+            <button className="mt-5 md:mt-0 md:ml-8 flex items-center">
+              <FontAwesomeIcon className="border-4 border-orange-500 p-4 rounded-full" icon={faPlay} />
+              <span className="ml-5 leading-8 text-xl">Ver video</span>
+            </button>
           </div>
         </div>
         <img data-aos="fade-left" className="w-full md:w-2/5 mt-3 md:mt-0 md:ml-20" src="/assets/img/Banner.png" />
@@ -53,31 +89,98 @@ export default function Home() {
 
 
       <section data-aos="fade-left" className="w-full h-auto px-5 md:px-14 mt-24 mb-7 flex flex-col md:flex-row gap-7 items-center justify-between">
-          <div className="w-full h-72 bg-red-200 rounded-lg p-5 flex items-center justify-evenly md:w-2/4 md:h-64">
-              <div className="h-auto flex flex-col justify-between md:h-4/6">
-                  <div>
-                      <h3 className="text-xl font-bold md:text-2xl">Sofas Largos</h3>
-                      <p>
-                          Sofá cómodo y elegante.
-                      </p>
-                  </div>
-                  <a href="#" className="mt-5 md:mt-0 underline text-orange-600 hover:text-orange-400 duration-300">COMPRAR AHORA</a>
-              </div>
-              <img className="w-2/4 mt-3 md:w-2/5 md:mt-0 md:ml-20" src="/assets/img/LongSofa.png" />
+        <div className="w-full h-72 bg-red-200 rounded-lg p-5 flex items-center justify-evenly md:w-2/4 md:h-64">
+          <div className="h-auto flex flex-col justify-between md:h-4/6">
+            <div>
+              <h3 className="text-xl font-bold md:text-2xl">Sofas Largos</h3>
+              <p>
+                Sofá cómodo y elegante.
+              </p>
+            </div>
+            <a href="#" className="mt-5 md:mt-0 underline text-orange-600 hover:text-orange-400 duration-300">COMPRAR AHORA</a>
           </div>
+          <img className="w-2/4 mt-3 md:w-2/5 md:mt-0 md:ml-20" src="/assets/img/LongSofa.png" />
+        </div>
 
-          <div className="w-full h-72 bg-slate-300 rounded-lg p-5 flex items-center justify-evenly md:w-2/4 md:h-64">
-              <div className="h-auto flex flex-col justify-between md:h-4/6">
-                  <div>
-                      <h3 className="text-xl font-bold md:text-2xl">Silla de comedor</h3>
-                      <p>
-                            Silla clásica y funcional.
-                      </p>
-                  </div>
-                  <a href="#" className="mt-5 md:mt-0 underline text-orange-600 hover:text-orange-400 duration-300">COMPRAR AHORA</a>
-              </div>
-              <img className="w-2/4 mt-3 md:w-2/5 md:mt-0 md:ml-20" src="/assets/img/Chair.png" />
+        <div className="w-full h-72 bg-slate-300 rounded-lg p-5 flex items-center justify-evenly md:w-2/4 md:h-64">
+          <div className="h-auto flex flex-col justify-between md:h-4/6">
+            <div>
+              <h3 className="text-xl font-bold md:text-2xl">Silla de comedor</h3>
+              <p>
+                Silla clásica y funcional.
+              </p>
+            </div>
+            <a href="#" className="mt-5 md:mt-0 underline text-orange-600 hover:text-orange-400 duration-300">COMPRAR AHORA</a>
           </div>
+          <img className="w-2/4 mt-3 md:w-2/5 md:mt-0 md:ml-20" src="/assets/img/Chair.png" />
+        </div>
+      </section>
+
+
+
+      <section className="w-full h-auto px-5 md:px-14 my-28 mb-7">
+        <h2 className="text-3xl font-bold text-center">Productos tendencia</h2>
+
+        <Swiper
+          spaceBetween={10}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            900: {
+              slidesPerView: 3,
+              spaceBetween: 50,
+            },
+          }}
+          pagination={{
+            clickable: true,
+            el: '.swiper-pagination',
+            type: 'bullets',
+          }}
+          modules={[Pagination]}
+          className="mySwiper w-full h-auto pb-6"
+        >
+          {products.map((product) => (
+            <SwiperSlide className="my-20">
+              <div className="w-full h-72 flex items-center justify-center bg-gray-300 rounded-md">
+                  <img className="block m-auto w-56" src={`/assets/img/${product.image}`} alt={product.name} />
+              </div>
+              <h3 className="font-bold text-xl lg:text-3xl my-5">{product.name}</h3>
+              <div className="my-3 flex">
+                <FontAwesomeIcon className="text-yellow-500 text-xl" icon={faStar} />
+                <FontAwesomeIcon className="text-yellow-500 text-xl" icon={faStar} />
+                <FontAwesomeIcon className="text-yellow-500 text-xl" icon={faStar} />
+                <FontAwesomeIcon className="text-yellow-500 text-xl" icon={faStar} />
+                <FontAwesomeIcon className="text-yellow-500 text-xl" icon={faStar} />
+              </div>
+              <div className="w-full flex items-center justify-between">
+                  <h4 className="font-bold text-xl text-center">{product.price} $</h4> 
+                  <button><FontAwesomeIcon className="bg-orange-600 hover:bg-orange-400 duration-300 p-3 rounded-full" icon={faPlus} /></button> 
+              </div>
+            </SwiperSlide>
+          ))}
+          <div className="swiper-pagination mt-7"></div>
+        </Swiper>
+      </section>
+
+
+
+
+
+      <section className="w-full h-auto px-5 md:px-14 my-28">
+            <div className="w-full flex justify-between">
+                    <h2 className="text-5xl font-bold">PRODUCTOS</h2>
+                    <div className="w-auto flex items-center">
+                        <button className="mx-3 hover:text-orange-500 duration-300">Todos</button>
+                        <button className="mx-3 hover:text-orange-500 duration-300">Sillas</button>
+                        <button className="mx-3 hover:text-orange-500 duration-300">Almacenamiento</button>
+                        <button className="mx-3 hover:text-orange-500 duration-300">Camas</button>
+                        <button className="mx-3 hover:text-orange-500 duration-300">Accesorios</button>
+                        <button className="mx-3 hover:text-orange-500 duration-300">Sofas</button>
+                        <button className="mx-3 hover:text-orange-500 duration-300">Oficinas</button>
+                    </div>
+            </div>
       </section>
     </main>
   );

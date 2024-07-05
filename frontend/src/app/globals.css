@@ -2,3 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
+
+
+
+.swiper-pagination-bullet {
+    width: 16px !important; 
+    height: 16px !important;
+    background-color: #fff; 
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+}
+
+.swiper-pagination-bullet-active {
+    width: 40px !important;
+    border-radius: 10px !important;
+    background-color: #e0a912 !important; 
+}
+
+
+
