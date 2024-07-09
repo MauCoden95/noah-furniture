@@ -16,7 +16,32 @@ class ProductController extends Controller
     }
 
     
+    /**
+     * Display all products.
+     */
+    public function showAllProducts()
+    {
+        $products = Product::all();
+
+        return response()->json($products);
+    }
+
     
+    /**
+     * Display all products of a specific category.
+     */
+    public function showProductsByCategory($categoryName)
+    {
+        if ($categoryName == '') {
+            $products = Product::all();
+        } else {
+            $products = Product::whereHas('category', function($query) use ($categoryName) {
+                $query->where('name', $categoryName);
+            })->get();
+        }
+
+        return response()->json($products);
+    }
    
     public function getRandomProducts()
     {

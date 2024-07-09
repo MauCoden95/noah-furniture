@@ -9,5 +9,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::controller(ProductController::class)->group(function () {
+   Route::get('/products', 'showAllProducts');
    Route::get('/products-random', 'getRandomProducts');
+   Route::get('/products/{categoryName}', 'showProductsByCategory');
 });

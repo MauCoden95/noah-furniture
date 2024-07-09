@@ -24,6 +24,9 @@ import { Pagination } from 'swiper/modules';
 export default function Home() {
 
   const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState('');
+  const [productsByCategory, setProductsByCategory] = useState([]);
+
 
   useEffect(() => {
     AOS.init({
@@ -39,6 +42,9 @@ export default function Home() {
     };
 
     fetchProducts();
+
+
+    changeProducts('');
   }, []);
 
   const getProducts = async () => {
@@ -47,13 +53,16 @@ export default function Home() {
     return data;
   };
 
+  //Obtener productos por categoria
+  const changeProducts = async (category) => {
+    setCategory(category);
+    const res = await fetch(`http://127.0.0.1:8000/api/products/${category}`);
+    const data = await res.json();
 
-
-
-
-
-
-
+    setProductsByCategory(data);
+    console.log(data); // Log the updated data directly
+    return data;
+  }
 
   return (
     <main>
@@ -78,15 +87,6 @@ export default function Home() {
         </div>
         <img data-aos="fade-left" className="w-full md:w-2/5 mt-3 md:mt-0 md:ml-20" src="/assets/img/Banner.png" />
       </section>
-
-
-
-
-
-
-
-
-
 
       <section data-aos="fade-left" className="w-full h-auto px-5 md:px-14 mt-24 mb-7 flex flex-col md:flex-row gap-7 items-center justify-between">
         <div className="w-full h-72 bg-red-200 rounded-lg p-5 flex items-center justify-evenly md:w-2/4 md:h-64">
@@ -116,8 +116,6 @@ export default function Home() {
         </div>
       </section>
 
-
-
       <section className="w-full h-auto px-5 md:px-14 my-28 mb-7">
         <h2 className="text-3xl font-bold text-center">Productos tendencia</h2>
 
@@ -144,7 +142,7 @@ export default function Home() {
           {products.map((product) => (
             <SwiperSlide className="my-20">
               <div className="w-full h-72 flex items-center justify-center bg-gray-300 rounded-md">
-                  <img className="block m-auto w-56" src={`/assets/img/${product.image}`} alt={product.name} />
+                <img className="block m-auto w-56" src={`/assets/img/${product.image}`} alt={product.name} />
               </div>
               <h3 className="font-bold text-xl lg:text-3xl my-5">{product.name}</h3>
               <div className="my-3 flex">
@@ -155,8 +153,8 @@ export default function Home() {
                 <FontAwesomeIcon className="text-yellow-500 text-xl" icon={faStar} />
               </div>
               <div className="w-full flex items-center justify-between">
-                  <h4 className="font-bold text-xl text-center">{product.price} $</h4> 
-                  <button><FontAwesomeIcon className="bg-orange-600 hover:bg-orange-400 duration-300 p-3 rounded-full" icon={faPlus} /></button> 
+                <h4 className="font-bold text-xl text-center">{product.price} $</h4>
+                <button><FontAwesomeIcon className="bg-orange-600 hover:bg-orange-400 duration-300 p-3 rounded-full" icon={faPlus} /></button>
               </div>
             </SwiperSlide>
           ))}
@@ -164,23 +162,45 @@ export default function Home() {
         </Swiper>
       </section>
 
+      <section className="w-full min-h-[400px] px-5 md:px-14 my-28">
+        <div className="w-full flex flex-col md:flex-row justify-between">
+          <h2 className="text-3xl md:text-5xl font-bold">PRODUCTOS</h2>
+          <div className="w-auto flex flex-wrap items-center mt-5 md:mt-0">
+            <button onClick={() => changeProducts('')} className="mx-2 md:mx-3 text-sm md:text-base hover:text-orange-500 duration-300">Todos</button>
+            <button onClick={() => changeProducts('Sillas')} className="mx-2 md:mx-3 text-sm md:text-base hover:text-orange-500 duration-300">Sillas</button>
+            <button onClick={() => changeProducts('Almacenamiento')} className="mx-2 md:mx-3 text-sm md:text-base hover:text-orange-500 duration-300">Almacenamiento</button>
+            <button onClick={() => changeProducts('Camas')} className="mx-2 md:mx-3 text-sm md:text-base hover:text-orange-500 duration-300">Camas</button>
+            <button onClick={() => changeProducts('Accesorios')} className="mx-2 md:mx-3 text-sm md:text-base hover:text-orange-500 duration-300">Accesorios</button>
+            <button onClick={() => changeProducts('Sofas')} className="mx-2 md:mx-3 text-sm md:text-base hover:text-orange-500 duration-300">Sofas</button>
+            <button onClick={() => changeProducts('Oficinas')} className="mx-2 md:mx-3 text-sm md:text-base hover:text-orange-500 duration-300">Oficinas</button>
+          </div>
+        </div>
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {productsByCategory.length > 0 ? (
+            productsByCategory.map((product) => (
+              <div key={product.id} className="w-full h-auto mb-5 p-4 rounded-md">
+                <div className="w-full h-72 flex items-center justify-center bg-gray-300 rounded-md">
+                  <img className="block m-auto w-56" src={`/assets/img/${product.image}`} alt={product.name} />
+                </div>
+                <div className="w-full mt-10 flex items-center justify-between">
+                  <h3 className="font-bold text-xl my-5">{product.name}</h3>
+                  <h4 className="font-bold text-xl text-center text-orange-600">{product.price} $</h4>
+                </div>
+              </div>
+            ))
+          ) : (
+            <h3 className="col-span-1 md:col-span-2 lg:col-span-3 text-center text-2xl font-bold">No hay productos para esa categoria</h3>
+          )}
+        </div>
+      </section>
 
 
+      <section className="w-full h-[400px] px-5 md:px-14 my-28 bg-gray-300 flex items-center justify-between">
+          <div className="w-2/4">
+              <h2 className="text-4xl font-bold text-center">50% OFF en Sofás</h2>
+          </div>
 
-
-      <section className="w-full h-auto px-5 md:px-14 my-28">
-            <div className="w-full flex justify-between">
-                    <h2 className="text-5xl font-bold">PRODUCTOS</h2>
-                    <div className="w-auto flex items-center">
-                        <button className="mx-3 hover:text-orange-500 duration-300">Todos</button>
-                        <button className="mx-3 hover:text-orange-500 duration-300">Sillas</button>
-                        <button className="mx-3 hover:text-orange-500 duration-300">Almacenamiento</button>
-                        <button className="mx-3 hover:text-orange-500 duration-300">Camas</button>
-                        <button className="mx-3 hover:text-orange-500 duration-300">Accesorios</button>
-                        <button className="mx-3 hover:text-orange-500 duration-300">Sofas</button>
-                        <button className="mx-3 hover:text-orange-500 duration-300">Oficinas</button>
-                    </div>
-            </div>
+          <img className="block m-auto w-2/4" src="/assets/img/Sofa.png" alt="Sofa" />
       </section>
     </main>
   );
