@@ -56,3 +56,21 @@ body {
 .banner-video{
     background: rgba(0, 0, 0, 0.95) !important;
 }
+
+
+.navbar_show{
+  transform: translateX(0);
+  transition: all 300ms;
+}
+
+.navbar_hidden{
+  transform: translateX(100%);
+  transition: all 300ms;
+}
+
+
+@media (min-width: 600px) {
+  .navbar_hidden {
+    transform: translateX(0);
+  }
+}

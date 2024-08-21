@@ -21,7 +21,7 @@ export const TheProductsTrend = () => {
     const products = useProducts();
 
     return (
-        <section className="w-full h-auto px-5 md:px-14 my-28 mb-7">
+        <section className="w-full h-auto px-8 md:px-14 my-28 mb-7">
             <h2 className="text-3xl font-bold text-center">Productos tendencia</h2>
 
             <Swiper

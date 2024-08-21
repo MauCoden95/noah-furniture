@@ -23,14 +23,14 @@ export const TheBanner = () => {
         <section className="reative w-full min-h-[400px] px-10 mt-12 md:mt-16 md:px-14">
             <div className='flex flex-col md:flex-row items-center'>
                 <div data-aos="fade-up" className="w-full md:w-2/4 h-full flex flex-col">
-                    <h1 className="text-2xl md:text-4xl text-center md:text-left">
+                    <h1 className="text-2xl sm:text-xl md:text-4xl text-center md:text-left">
                         Diseño y <span className="text-orange-500">comodidad</span> para cada rincón.
                     </h1>
                     <p className="text-lg md:text-xl text-justify my-5">
                         Descubre nuestra exclusiva colección de muebles diseñados para brindar elegancia y funcionalidad a cada rincón de tu hogar. Ofrecemos piezas únicas que reflejan tu personalidad y buen gusto.
                     </p>
                     <div className="my-5 flex flex-col md:flex-row items-center">
-                        <a className="cursor-pointer text-lg md:text-xl bg-orange-500 hover:bg-orange-400 duration-300 px-5 py-3 rounded-full text-center md:text-left">
+                        <a className="cursor-pointer text-lg  md:text-xl bg-orange-500 hover:bg-orange-400 duration-300 px-5 py-3 rounded-full text-center md:text-left">
                             Descubrir ahora
                         </a>
 

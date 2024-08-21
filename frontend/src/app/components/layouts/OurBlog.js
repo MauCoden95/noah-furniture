@@ -12,9 +12,9 @@ export const OurBlog = () => {
       <p className="text-center">
         Explora nuestra sección de blog para obtener ideas, consejos y novedades sobre muebles y decoración que transformarán tu hogar.
       </p>
-      <div className="w-full my-16 flex gap-8 items-center justify-between">
-        <div className="w-1/3">
-          <img className="w-full h-44" src="../assets/img/Blog.jpg" />
+      <div className="w-full my-16 flex flex-col md:flex-row gap-8 items-center justify-between">
+        <div className="w-full md:w-1/3">
+          <img className="w-full h-56 sm:h-44" src="../assets/img/Blog.jpg" />
           <div className="my-5 flex">
             <h2 className="text-gray-500">
               <FontAwesomeIcon className="mr-1" icon={faUser} />
@@ -30,8 +30,8 @@ export const OurBlog = () => {
           </h3>
         </div>
 
-        <div className="w-1/3">
-          <img className="w-full h-44" src="../assets/img/Blog2.jpg" />
+        <div className="w-full md:w-1/3">
+          <img className="w-full h-56 sm:h-44" src="../assets/img/Blog2.jpg" />
           <div className="my-5 flex">
             <h2 className="text-gray-500">
               <FontAwesomeIcon className="mr-1" icon={faUser} />
@@ -47,8 +47,8 @@ export const OurBlog = () => {
           </h3>
         </div>
 
-        <div className="w-1/3">
-          <img className="w-full h-44" src="../assets/img/Blog3.jpg" />
+        <div className="w-full md:w-1/3">
+          <img className="w-full h-56 sm:h-44" src="../assets/img/Blog3.jpg" />
           <div className="my-5 flex">
             <h2 className="text-gray-500">
               <FontAwesomeIcon className="mr-1" icon={faUser} />
