@@ -3,7 +3,8 @@ import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import { TheHeader } from './components/TheHeader';
+import { TheHeader } from './components/layouts/TheHeader';
+import { TheFooter } from "./components/layouts/TheFooter";
 
 export const metadata = {
   title: "Noah Furniture",
@@ -13,9 +14,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="max-w-full bg-gray-200">
+      <body className="max-w-full bg-gray-200 relative overflow-x-hidden">
         <TheHeader />
         {children}
+        <TheFooter />
       </body>
     </html>
   );
