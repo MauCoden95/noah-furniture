@@ -43,11 +43,23 @@ class ProductController extends Controller
         return response()->json($products);
     }
    
+
+
+
     public function getRandomProducts()
     {
         $products = Product::inRandomOrder()->take(6)->get();
 
         return response()->json($products);
+    }
+
+
+
+
+    public function getProductById($id){
+        $product = Product::find($id);
+
+        return response()->json($product);
     }
 
     /**

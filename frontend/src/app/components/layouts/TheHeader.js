@@ -31,16 +31,16 @@ export const TheHeader = () => {
         </button>
         <ul className="w-full h-full flex flex-col md:flex-row items-center justify-evenly md:justify-between">
           <li className="text-2xl md:text-base pb-2 hover:border-b-4 hover:border-orange-500">
-            <Link href="/">Inicio</Link>
+            <Link href="/" onClick={toggleShowNavbar}>Inicio</Link>
           </li>
           <li className="text-2xl md:text-base pb-2 hover:border-b-4 hover:border-orange-500">
-            <Link href="/">Nosotros</Link>
+            <Link href="/nosotros" onClick={toggleShowNavbar}>Nosotros</Link>
           </li>
           <li className="text-2xl md:text-base pb-2 hover:border-b-4 hover:border-orange-500">
-            <Link href="/">Productos</Link>
+            <Link href="/productos" onClick={toggleShowNavbar}>Productos</Link>
           </li>
           <li className="text-2xl md:text-base pb-2 hover:border-b-4 hover:border-orange-500">
-            <Link href="/">Contacto</Link>
+            <Link href="/contacto" onClick={toggleShowNavbar}>Contacto</Link>
           </li>
         </ul>
       </nav>

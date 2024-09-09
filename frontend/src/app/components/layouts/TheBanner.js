@@ -7,7 +7,7 @@ export const TheBanner = () => {
     const [srcVideo, setSrcVideo] = useState('/assets/video/Banner.mp4');
     const [video, setVideo] = useState(false);
 
-    const videosUrls = ['/assets/video/Banner.mp4', '/assets/video/Banner2.mp4', '/assets/video/Banner3.mp4']
+    const videosUrls = ['/assets/video/Banner.mp4', '/assets/video/Banner2.mp4', '/assets/video/Banner3.mp4','/assets/video/Banner4.mp4']
 
 
     const changeSrcVideo = (src) => {
