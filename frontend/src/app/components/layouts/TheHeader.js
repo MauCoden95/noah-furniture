@@ -10,9 +10,14 @@ import '../../globals.css'
 export const TheHeader = () => {
 
   const [showNavbar, setShowNavbar] = useState(false);
+  const [login, setLogin] = useState(false);
 
   const toggleShowNavbar = () => {
     setShowNavbar(!showNavbar);
+  }
+
+  const showLogin = () => {
+    setLogin(!login);
   }
 
   return (
@@ -44,12 +49,22 @@ export const TheHeader = () => {
           </li>
         </ul>
       </nav>
-      <div className="w-2/6 sm:w-2/12 h-full flex items-center justify-between">
+      <div className="relative w-2/5 sm:w-3/12 h-full flex items-center justify-between">
         <button className="md:text-2xl hover:text-orange-500 duration-300">
           <FontAwesomeIcon icon={faSearch} />
         </button>
 
-        <Link className="px-5 py-3 rounded-full text-xl bg-orange-500 hover:bg-orange-300 duration-300" href="/login">Login</Link>
+        <button onClick={showLogin} className="px-5 py-3 rounded-full text-xl bg-orange-500 hover:bg-orange-300 duration-300" href="/login">Login</button>
+
+        <div className={`${login ? 'login_hidden' : 'login_show'} absolute top-full right-1 sm:right-0 w-52 sm:w-full z-50 min-h-24 py-5 px-6 rounded-md bg-gray-300`}>
+            <input className='w-full p-2' type='text' placeholder='Email'/>
+            <input className='w-full p-2 my-5' type='pasword' placeholder='Contraseña'/>
+            <input className='w-full p-2 mb-5 cursor-pointer bg-orange-600 hover:bg-orange-400 duration-300' type='submit' placeholder='Enviar'/>
+            <h3 className='text-center my-3 '>¿No tiene cuenta?</h3>
+            <Link href="/" className='block text-center text-orange-600 hover:text-orange-800 duration-300'>
+                Registrese acá
+            </Link>
+        </div>
       </div>
     </header>
   )

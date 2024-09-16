@@ -1,7 +1,13 @@
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import dynamic from 'next/dynamic';
+
+
+const LazyImage = dynamic(() => import('./LazyImage'));
+
 
 export const ProductList = ({ products }) => {
     return (
@@ -13,7 +19,13 @@ export const ProductList = ({ products }) => {
                             <Link className='absolute top-2 right-2 text-2xl hover:text-orange-500 duration-300' href={`http://localhost:3000/productos/${product.id}`}>
                                 <FontAwesomeIcon icon={faInfoCircle} />
                             </Link>
-                            <img className="block m-auto w-56" src={`/assets/img/${product.image}`} alt={product.name} />
+                            <LazyImage
+                                style="block m-auto"
+                                src={`/assets/img/${product.image}`} 
+                                alt={product.name}
+                                width={450}
+                                height={300}
+                            />
                         </div>
                         <div className="w-full mt-10 flex items-center justify-between">
                             <h3 className="font-bold text-xl my-5">{product.name}</h3>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faStar } from '@fortawesome/free-solid-svg-icons';
+import dynamic from 'next/dynamic';
 
 import useProducts from '@/app/hooks/useProducts';
 
@@ -14,6 +15,7 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 
 
+const LazyImage = dynamic(() => import('./LazyImage'))
 
 
 export const TheProductsTrend = () => {
@@ -47,7 +49,13 @@ export const TheProductsTrend = () => {
                 {products.map((product) => (
                     <SwiperSlide className="my-20">
                         <div className="w-full h-72 flex items-center justify-center bg-gray-300 rounded-md">
-                            <img className="block m-auto w-56" src={`/assets/img/${product.image}`} alt={product.name} />
+                            <LazyImage
+                                styles="block m-auto w-56"
+                                src={`/assets/img/${product.image}`}
+                                alt={product.name}
+                                width={450}
+                                height={300}
+                            />
                         </div>
                         <h3 className="font-bold text-xl lg:text-3xl my-5">{product.name}</h3>
                         <div className="my-3 flex">

@@ -4,23 +4,30 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
+import dynamic from 'next/dynamic';
+const LazyImage = dynamic(() => import('./LazyImage'));
+
 export const ProductData = ({ id }) => {
 
     const product = useProductDetail({ id });
 
-    useEffect(() => {
-        console.log(product);
-    }, [product]);
+   
 
     return (
         <div className='relative'>
             <Link className='absolute top-2 right-2 text-2xl' href={`http://localhost:3000`}>
                 <FontAwesomeIcon icon={faArrowLeft} />
-                 Volver
+                Volver
             </Link>
             {product && (
-                <div className='w-full flex flex-col md:flex-row items-center justify-evenly'>
-                    <img className='w-full md:w-2/5' src={`/assets/img/${product.image}`} />
+                <div className='w-full flex gap-8 flex-col md:flex-row items-center justify-evenly'>
+                    <LazyImage
+                        style="w-full md:w-2/5"
+                        src={`/assets/img/${product.image}`}
+                        alt={product.name}
+                        width={450}
+                        height={300}
+                    />
                     <div className='w-full md:w-3/6 mt-5 md:mt-0'>
                         <h2 className='text-2xl md:text-3xl font-bold my-5'>{product.name}</h2>
                         <p className='text-justify'>{product.description}</p>
