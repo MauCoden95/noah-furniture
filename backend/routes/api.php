@@ -20,4 +20,5 @@ Route::controller(ProductController::class)->group(function () {
 Route::group(['middleware' => 'api'], function($routes) {
     Route::post('user-register', [UserController::class,'register']);
     Route::post('user-login', [UserController::class,'login']);
+    Route::get('profile', [UserController::class,'profile']);
 });

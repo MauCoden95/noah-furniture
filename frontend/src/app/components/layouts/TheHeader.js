@@ -1,16 +1,17 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faTimes, faBars } from '@fortawesome/free-solid-svg-icons'
+import { FormLogin } from './FormLogin'
 import '../../globals.css'
-
 
 export const TheHeader = () => {
 
   const [showNavbar, setShowNavbar] = useState(false);
   const [login, setLogin] = useState(false);
+  const [logged, setLogged] = useState('');
 
   const toggleShowNavbar = () => {
     setShowNavbar(!showNavbar);
@@ -20,10 +21,28 @@ export const TheHeader = () => {
     setLogin(!login);
   }
 
+  useEffect(() => {
+    handleLogin();
+  }, []);
+
+  const handleLogin = () => {
+    if (localStorage.getItem('user') && localStorage.getItem('token')) {
+      setLogged(true);
+    } else {
+      setLogged(false);
+    }
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    setLogged(false);
+  }
+
   return (
     <header className="relative w-full h-auto px-8 sm:px-14 flex items-center justify-between">
       <Link href="/">
-        <img className="w-20 md:w-28" src="/assets/img/logo.png" />
+        <img className="w-20 md:w-28" src="/assets/img/logo.png" alt="Logo" />
       </Link>
 
       <button className="block md:hidden text-2xl" onClick={toggleShowNavbar}>
@@ -49,23 +68,30 @@ export const TheHeader = () => {
           </li>
         </ul>
       </nav>
-      <div className="relative w-2/5 sm:w-3/12 h-full flex items-center justify-between">
-        <button className="md:text-2xl hover:text-orange-500 duration-300">
+
+      <div className="relative w-2/5 sm:w-3/12 h-full flex items-center justify-end">
+        <button className="md:text-2xl mr-3 hover:text-orange-500 duration-300">
           <FontAwesomeIcon icon={faSearch} />
         </button>
 
-        <button onClick={showLogin} className="px-5 py-3 rounded-full text-xl bg-orange-500 hover:bg-orange-300 duration-300" href="/login">Login</button>
+        {
+          logged ? (
+            <button onClick={handleLogout} className="px-5 py-3 rounded-full text-xl bg-orange-500 hover:bg-orange-300 duration-300">
+              Cerrar sesión
+            </button>
+          ) : (
+            <>
+              <button onClick={showLogin} className="px-5 py-3 rounded-full text-xl bg-orange-500 hover:bg-orange-300 duration-300">
+                Login
+              </button>
 
-        <div className={`${login ? 'login_hidden' : 'login_show'} absolute top-full right-1 sm:right-0 w-52 sm:w-full z-50 min-h-24 py-5 px-6 rounded-md bg-gray-300`}>
-            <input className='w-full p-2' type='text' placeholder='Email'/>
-            <input className='w-full p-2 my-5' type='pasword' placeholder='Contraseña'/>
-            <input className='w-full p-2 mb-5 cursor-pointer bg-orange-600 hover:bg-orange-400 duration-300' type='submit' placeholder='Enviar'/>
-            <h3 className='text-center my-3 '>¿No tiene cuenta?</h3>
-            <Link href="/" className='block text-center text-orange-600 hover:text-orange-800 duration-300'>
-                Registrese acá
-            </Link>
-        </div>
+              <div className={`${login ? 'login_show' : 'login_hidden'} absolute top-full right-1 sm:right-0 w-52 sm:w-full z-50 min-h-24 py-5 px-6 rounded-md bg-gray-300`}>
+                <FormLogin />
+              </div>
+            </>
+          )
+        }
       </div>
     </header>
-  )
+  );
 }
