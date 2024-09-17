@@ -10,7 +10,7 @@ import '../../globals.css'
 export const TheHeader = () => {
 
   const [showNavbar, setShowNavbar] = useState(false);
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(true);
   const [logged, setLogged] = useState('');
 
   const toggleShowNavbar = () => {
