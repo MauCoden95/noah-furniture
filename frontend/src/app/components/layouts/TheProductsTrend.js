@@ -18,11 +18,11 @@ export const TheProductsTrend = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
 
     const handleProductClick = (product) => {
-        setSelectedProduct(product); // Mostrar popup con el producto seleccionado
+        setSelectedProduct(product);
     };
 
     const handleClosePopup = () => {
-        setSelectedProduct(null); // Cerrar el popup
+        setSelectedProduct(null);
     };
 
     return (
@@ -84,10 +84,11 @@ export const TheProductsTrend = () => {
                 <div className="swiper-pagination mt-7"></div>
             </Swiper>
 
-           
+
             {selectedProduct && (
                 <ProductPopup product={selectedProduct} onClose={handleClosePopup} />
             )}
+
         </section>
     );
 };

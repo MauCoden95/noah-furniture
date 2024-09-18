@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import LazyImage from './LazyImage';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 const ProductPopup = ({ product, onClose }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   useEffect(() => {
-    setIsVisible(true);
-  }, []);
+    // Verificar si el usuario está logueado
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+
+    if (product) {
+      setIsVisible(true);
+    }
+  }, [product]);
 
   const handleClose = () => {
     setIsVisible(false);
@@ -31,7 +40,7 @@ const ProductPopup = ({ product, onClose }) => {
       className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
     >
       <div
-        className={`bg-white px-6 py-10 rounded-lg shadow-lg w-11/12 md:w-4/6 relative transition-transform duration-300 transform ${isVisible ? 'scale-100' : 'scale-90'} flex flex-col md:flex-row items-center justify-evenly`}
+        className={`bg-white px-6 py-10 rounded-lg shadow-lg w-11/12 md:w-4/6 relative transition-transform duration-300 transform ${isVisible ? 'scale-100' : 'scale-90'} flex flex-col md:flex-row items-start justify-evenly`}
       >
         <LazyImage
           styles="w-full md:w-3/6 min-h-64 bg-gray-400 p-2 rounded-xl"
@@ -55,28 +64,35 @@ const ProductPopup = ({ product, onClose }) => {
             <span className="text-lg font-bold text-green-600">${product.price}</span>
           </div>
 
-          <div className="flex items-center space-x-2 text-xl">
-            <button
-              className="border px-3 py-1 rounded-md"
-              onClick={() => handleQuantityChange('decrease')}
-            >
-              -
-            </button>
-            <span className='text-xl'>{quantity}</span>
-            <button
-              className="border px-3 py-1 rounded-md text-xl"
-              onClick={() => handleQuantityChange('increase')}
-            >
-              +
-            </button>
-            <span className="font-bold ml-4">= ${totalPrice}</span>
-          </div>
+          {!isLoggedIn ? (
+            <div className="text-center text-red-600">
+              <p className="mb-4">Por favor, inicie sesión para añadir productos al carrito.</p>
+            </div>
+          ) : (
+            <>
+              <div className="flex items-center space-x-2 text-xl">
+                <button
+                  className="border border-gray-400 px-3 py-1 rounded-md"
+                  onClick={() => handleQuantityChange('decrease')}
+                >
+                  -
+                </button>
+                <span className='text-xl'>{quantity}</span>
+                <button
+                  className="border border-gray-400 px-3 py-1 rounded-md text-xl"
+                  onClick={() => handleQuantityChange('increase')}
+                >
+                  +
+                </button>
+                <span className="font-bold ml-4">= ${totalPrice}</span>
+              </div>
 
-          <button className="mt-4 bg-green-600 hover:bg-green-500 text-white px-6 py-2 rounded-lg">
-            Add to Cart
-          </button>
-
-          
+              <button className="mt-4 bg-green-600 hover:bg-green-500 text-white px-6 py-2 rounded-lg">
+                <FontAwesomeIcon className='mr-3' icon={faShoppingCart} />
+                Añadir al carrito
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>
