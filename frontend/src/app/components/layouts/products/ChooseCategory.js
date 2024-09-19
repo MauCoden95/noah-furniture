@@ -2,31 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import LazyImage from "../LazyImage";
-import ProductCard from "./ProductCard";
+import { PaginatedProducts } from "./PaginatedProducts";
 import axios from "axios";
 
 export const ChooseCategory = () => {
-    const [products, setProducts] = useState([]);
+    
 
-    const getAllProducts = async () => {
-        try {
-            const response = await axios.get("http://127.0.0.1:8000/api/products");
-            const data = response.data;
-            setProducts(data);
-        } catch (error) {
-            console.error("Error fetching products:", error);
-        }
-    };
-
-    useEffect(() => {
-        getAllProducts();
-
-
-    }, []);
-
-    useEffect(() => {
-        console.log(products);
-    }, [products]);
+   
 
     return (
         <div className="max-w-7xl mx-auto py-8 px-7 md:px-14">
@@ -42,7 +24,7 @@ export const ChooseCategory = () => {
                             height={300}
                         />
                     </div>
-                    <span className="text-center text-xl">Camas</span>
+                    <span className="text-center text-sm">Camas</span>
                 </button>
 
                 <button className="cursor-pointer flex flex-col items-center">
@@ -107,17 +89,12 @@ export const ChooseCategory = () => {
                             height={300}
                         />
                     </div>
-                    <span className="text-center text-sm">Accessorios</span>
+                    <span className="text-center text-sm">Accesorios</span>
                 </button>
             </div>
 
-            <div className="w-full mt-5 grid gap-5 grid-cols-3">
-                {
-                    products.map((item) => (
-                        <ProductCard product={item}/>
-                    ))
-                }
-            </div>
+          
+            <PaginatedProducts />
         </div>
     );
 };

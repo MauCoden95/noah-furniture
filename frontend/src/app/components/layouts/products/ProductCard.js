@@ -32,7 +32,7 @@ export default function ProductCard({ product }) {
                     <div className="mt-4 text-2xl font-bold text-gray-800">${product.price}</div>
 
 
-                    <button className="mt-6 w-full bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600">
+                    <button className="mt-6 w-full bg-orange-500 duration-300 text-white py-2 px-4 rounded-md hover:bg-orange-600">
                         Añadir al carrito
                     </button>
                 </div>

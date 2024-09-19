@@ -4,7 +4,7 @@ import LazyImage from '../LazyImage'
 export const BannerProducts = () => {
     return (
         <section class="bg-white py-16 px-7 md:px-14">
-            <div class="container mx-auto px-4 flex flex-col-reverse md:flex-row items-center">
+            <div data-aos="fade-up" class="container mx-auto px-4 flex flex-col-reverse md:flex-row items-center">
                 <div class="md:w-1/2 text-center md:text-left">
                     <h3 class="text-orange-500 text-sm font-bold mb-2">OFERTA HASTA 30% DE DESCUENTO</h3>
                     <h1 class="text-4xl font-bold mb-4">Sillas gamer</h1>
@@ -14,7 +14,7 @@ export const BannerProducts = () => {
 
 
 
-                <div class="md:w-1/2 flex justify-center mb-8 md:mb-0">
+                <div data-aos="fade-left" class="md:w-1/2 flex justify-center mb-8 md:mb-0">
                     <LazyImage
                         style=""
                         src="/assets/img/SillaGamer.png"
