@@ -6,7 +6,23 @@ import { PaginatedProducts } from "./PaginatedProducts";
 import axios from "axios";
 
 export const ChooseCategory = () => {
-    
+    const [products, setProducts] = useState([]);
+
+    const getAllProducts = async () => {
+        try {
+            const response = await axios.get("http://127.0.0.1:8000/api/products");
+            const data = response.data;
+            setProducts(data);
+        } catch (error) {
+            console.error("Error fetching products:", error);
+        }
+    };
+
+
+
+    useEffect(() => {
+        getAllProducts();
+    }, []);
 
    
 
@@ -94,7 +110,7 @@ export const ChooseCategory = () => {
             </div>
 
           
-            <PaginatedProducts />
+            <PaginatedProducts  products={products}/>
         </div>
     );
 };

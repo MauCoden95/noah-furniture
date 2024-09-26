@@ -4,7 +4,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
-export const FormLogin = () => {
+export const FormLogin = ({onLoginSuccess}) => {
 
     const [formData, setFormData] = useState({
         email: '',
@@ -39,6 +39,10 @@ export const FormLogin = () => {
                     });
                     localStorage.setItem('token',response.data.token);
                     localStorage.setItem('user',JSON.stringify(response.data.user));
+
+                    if (onLoginSuccess) {
+                        onLoginSuccess();
+                    } 
                 }
             })
             .catch(error => {

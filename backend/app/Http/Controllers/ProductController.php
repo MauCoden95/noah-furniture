@@ -33,9 +33,9 @@ class ProductController extends Controller
     public function showProductsByCategory($categoryName)
     {
         if ($categoryName == '') {
-            $products = Product::all();
+            $products = Product::with('category')->get();
         } else {
-            $products = Product::whereHas('category', function($query) use ($categoryName) {
+            $products = Product::with('category')->whereHas('category', function($query) use ($categoryName) {
                 $query->where('name', $categoryName);
             })->get();
         }
