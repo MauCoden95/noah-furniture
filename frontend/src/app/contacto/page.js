@@ -4,7 +4,7 @@ import Image from 'next/image'
 export default function page() {
     return (
         <div>
-            <section className='w-full py-8 px-4 md:px-14 bg-white'>
+            <section className='w-full py-8 px-8 md:px-14 bg-white'>
                 <h1 className='text-center my-5 text-3xl'>Contactános</h1>
                 <div className='w-full flex flex-col md:flex-row gap-6 items-start justify-between'>
                     <form className='w-full md:w-2/4'>

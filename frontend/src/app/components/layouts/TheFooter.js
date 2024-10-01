@@ -11,7 +11,7 @@ import {
 
 export const TheFooter = () => {
     return (
-        <footer className="w-full h-auto px-4 md:px-14 bg-teal-600">
+        <footer className="w-full h-auto px-8 md:px-14 bg-teal-600">
             <div className='py-7 flex flex-col md:flex-row items-start justify-between gap-10'>
                 <div className='w-full md:w-2/5 h-full'>
                     <img className="w-20 md:w-28" src="/assets/img/logoLight.png" />

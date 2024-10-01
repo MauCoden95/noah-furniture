@@ -65,6 +65,7 @@ export const FormLogin = ({onLoginSuccess}) => {
                 name='email'
                 placeholder='Email'
                 onChange={handleChange}
+                autoComplete='off'
             />
             <input
                 className='w-full p-2 my-5'
@@ -72,6 +73,7 @@ export const FormLogin = ({onLoginSuccess}) => {
                 name='password'
                 placeholder='Contraseña'
                 onChange={handleChange}
+                autoComplete='off'
             />
             <input
                 className='w-full p-2 mb-5 cursor-pointer bg-orange-600 hover:bg-orange-400 duration-300'
